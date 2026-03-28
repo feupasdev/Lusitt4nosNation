@@ -12,21 +12,21 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 
     // Função que decide o que fazer quando o elemento cruza a linha de visão
-    const observer = new IntersectionObserver((entries, observer) => {
+  document.addEventListener("DOMContentLoaded", function() {
+    const fadeEls = document.querySelectorAll('.fade-in-section');
+
+    const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Se o elemento entrou no ecrã, adiciona a classe que faz o fade in
                 entry.target.classList.add('is-visible');
             } else {
-                // Se o elemento saiu do ecrã (scroll para cima ou para baixo), remove a classe (Fade OUT)
-                // Se preferires que ele não faça fade out ao sair, comenta a linha abaixo:
+                // Remove a linha abaixo se quiseres que o texto não desapareça ao subir
                 entry.target.classList.remove('is-visible');
             }
         });
-    }, observerOptions);
+    }, { threshold: 0.15 });
 
-    // Diz ao observador para vigiar cada um dos elementos selecionados
-    fadeEls.forEach(el => {
-        observer.observe(el);
+    fadeEls.forEach(el => observer.observe(el));
+});
     });
 });
